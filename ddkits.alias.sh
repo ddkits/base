@@ -15,7 +15,7 @@ ddk() {
   if [[ $1 == "install" ]]; then
     echo -e 'Enter your Sudo/Root Password "just for setup purposes":'
     read -s SUDOPASS
-
+    echo $SUDOPASS | sudo -S ifconfig vboxnet0 down && sudo ifconfig vboxnet0 up
     # Downlaod all files into a seperate folder for ddkits only
     echo -e 'Creating DDkits folder .ddkits'
     DIRECTORY="$(echo ~/.ddkits)"
