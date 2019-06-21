@@ -26,7 +26,7 @@ ddk() {
       git clone https://github.com/ddkits/base.git ~/.ddkits
       chmod -R 744 ~/.ddkits
     else
-      DIRIS=$(echo -e "${DIRECTORY}/.git")
+      DIRIS=$(echo "${DIRECTORY}/.git")
       git --git-dir=${DIRIS} checkout -f
       git --git-dir=${DIRIS} pull
     fi
@@ -59,6 +59,7 @@ ddk() {
     mkdir ~/.ddkits/ddkits-files/ddkits/ssl
     mv ~/.ddkits/ddkits.site.key ~/.ddkits/ddkits-files/ddkits/ssl/
     mv ~/.ddkits/ddkits.site.crt ~/.ddkits/ddkits-files/ddkits/ssl/
+    chmod -R 777 ~/.ddkits/ddkits-files/ddkits/ssl
     echo "ssl crt and .key files moved correctly"
     echo -e '(1) Localhost \n(2) virtualbox'
     read DDKITSVER
