@@ -18,7 +18,7 @@ ddk() {
 
     # Downlaod all files into a seperate folder for ddkits only
     echo -e 'Creating DDkits folder .ddkits'
-    DIRECTORY=~/.ddkits
+    DIRECTORY="$(echo ~/.ddkits)"
     echo $SUDOPASS | sudo -S rm -rf ~/.ddkits
     if [ ! -d "$DIRECTORY" ]; then
       # Control will enter here if $DIRECTORY doesn't exist.
@@ -533,7 +533,7 @@ ddk() {
     SOLR     http://solr.YOUR_DOMAIN.ddkits.site
     PhpMyAdmin     http://admin.YOUR_DOMAIN.ddkits.site
 
-    DDKits v2.20
+    DDKits v2.21
         '
   else
     echo 'DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com
