@@ -7,6 +7,7 @@ RUN export TERM=xterm
 RUN sudo apt-get --allow-unauthenticated upgrade -y 
 
 # NOT FOUND response
+RUN mkdir /var/www/html
 ADD sites/custom_404.html /var/www/html/custom_404.html
 ADD sites/custom_50x.html /var/www/html/custom_50x.html
 ADD sites/index.php /var/www/html/index.php
