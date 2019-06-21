@@ -22,7 +22,6 @@ ddk() {
     echo $SUDOPASS | sudo -S rm -rf ~/.ddkits
     if [ ! -d "$DIRECTORY" ]; then
       # Control will enter here if $DIRECTORY doesn't exist.
-      echo -w 'git clone --single-branch --branch base https://github.com/ddkits/cli.git ~/.ddkits'
       git clone https://github.com/ddkits/base.git ~/.ddkits
       chmod -R 744 ~/.ddkits
     else
