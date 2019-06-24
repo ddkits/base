@@ -61,10 +61,10 @@ ddk() {
     chmod -R 777 ~/.ddkits/ddkits-files/ddkits/ssl
     echo "ssl crt and .key files moved correctly"
     echo -e 'DDkits web
-    ' >~/.ddkits_alias_web
-    # ddk c | grep ddkits  >/dev/null && export DDKITSIP='127.0.0.1' || export DDKITSIP='Please make sure your DDKits container is installed and running'
-    echo -e '(1) Localhost \n(2) virtualbox'
-    read DDKITSVER
+    ' > ~/.ddkits_alias_web
+      # ddk c | grep ddkits  >/dev/null && export DDKITSIP='127.0.0.1' || export DDKITSIP='Please make sure your DDKits container is installed and running'
+      echo -e '(1) Localhost \n(2) virtualbox'
+      read DDKITSVER
     if [[ $DDKITSVER == 1 ]]; then
       clear
       echo $SUDOPASS | sudo -S cat $LOGO
@@ -187,34 +187,32 @@ ddk() {
           break
         fi
       fi
-      if [[ -f ~/.ddkits_alias ]]; then
-        clear
+      clear
         echo $SUDOPASS | sudo -S cat $LOGO
-
-        docker-compose -f ~/.ddkits/ddkits.yml up -d --build
+      if [[ -f ~/.ddkits_alias ]]; then
         echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
         echo $SUDOPASS | sudo -S cp ddkits_alias ~/.ddkits_alias
         docker restart $(docker ps -q)
         docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.55.55/24" ddkits
         docker-machine start ddkits
         eval "$(docker-machine env ddkits)"
+        docker-compose -f ~/.ddkits/ddkits.yml up -d --build
         echo 'command source ~/.ddkits_alias  ~/.ddkits_alias_web 2>/dev/null || true ' >>~/.bash_profile
         echo -e '\nDDKits Already installed successfully before, \nThank you for using DDKits'
       else
-
-        docker-compose -f ~/.ddkits/ddkits.yml up -d --build
         echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
         echo $SUDOPASS | sudo -S cp ddkits_alias ~/.ddkits_alias
         docker restart $(docker ps -q)
         docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.55.55/24" ddkits
         docker-machine start ddkits
         eval "$(docker-machine env ddkits)"
+        docker-compose -f ~/.ddkits/ddkits.yml up -d --build
         echo 'command source ~/.ddkits_alias  ~/.ddkits_alias_web 2>/dev/null || true ' >>~/.bash_profile
         echo -e '\nDDKits installed successfully, \nThank you for using DDKits'
       fi
     fi
   elif [[ $1 == "ip" ]]; then
-    Docker-machine ls | grep ddkits >/dev/null && export DDKMACHINE='1' || echo 'DDKits container is not using DDKits Docker Machine'
+    Docker-machine ls | grep ddkits  >/dev/null && export DDKMACHINE='1' || echo 'DDKits container is not using DDKits Docker Machine'
     # export DDKITSIP=$(docker-machine ip ddkits)
     if [[ $DDKITSVER == '1' ]]; then
       ddk go
@@ -236,10 +234,10 @@ ddk() {
       echo -e 'ifconfig Refresh ->'
       echo $SUDOPASS | sudo -S ifconfig vboxnet0 down && sudo ifconfig vboxnet0 up
       echo -e 'ifconfig Refresh -> done ifconfig'
-      echo $SUDOPASS | sudo -S rm ~/.ddkits_alias
+      echo $SUDOPASS | sudo -S  rm ~/.ddkits_alias
       echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ~/.ddkits/ddkits_alias
-      echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits_alias ~/.ddkits_alias
-      echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias
+      echo $SUDOPASS | sudo -S  cp ~/.ddkits/ddkits_alias ~/.ddkits_alias
+      echo $SUDOPASS | sudo -S  chmod u+x ~/.ddkits_alias
       source ~/.ddkits_alias
       source ~/.ddkits_alias_web
       docker restart $(docker ps -q)
@@ -247,12 +245,12 @@ ddk() {
       clear
       echo $SUDOPASS | sudo -S cat $LOGO
       echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
-      echo $SUDOPASS | sudo -S cp ddkits_alias ~/.ddkits_alias
-      echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias
+      echo $SUDOPASS | sudo -S  cp ddkits_alias ~/.ddkits_alias
+      echo $SUDOPASS | sudo -S  chmod u+x ~/.ddkits_alias
       source ~/.ddkits_alias
       source ~/.ddkits_alias_web
       docker restart $(docker ps -q)
-      ddk c | grep ddkits >/dev/null && ddk install || echo -e 'DDkits Ready to go, well done :-)'
+      ddk c | grep ddkits  >/dev/null && ddk install || echo -e 'DDkits Ready to go, well done :-)'
 
     fi
 
