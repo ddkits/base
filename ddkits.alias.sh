@@ -67,6 +67,7 @@ ddk() {
       # ddk go
       # ddk c | grep ddkits  >/dev/null && export DDKITSIP=$(docker-machine ip ddkits) || export DDKITSIP='Please make sure your DDKits container is installed and running'
       echo -e 'DDKits virtualbox already installed and will be used to install DDKits container'
+      export DDKITSVER=2
     else
       # ddk c | grep ddkits  >/dev/null && export DDKITSIP='127.0.0.1' || export DDKITSIP='Please make sure your DDKits container is installed and running'
       echo -e '(1) Localhost \n(2) virtualbox'
@@ -262,6 +263,8 @@ ddk() {
       source ~/.ddkits_alias
       source ~/.ddkits_alias_web
       docker restart $(docker ps -q)
+      ddk c | grep ddkits >/dev/null && ddk install || echo -e 'DDkits Ready to go, well done :-)'
+
     fi
 
   elif [[ $1 == "com" ]]; then
