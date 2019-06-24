@@ -7,7 +7,7 @@
 # This system built by Mutasem Elayyoub DDKits.com
 # insert DDKits alias into anyh system command lines
 # source ddkits.alias.sh
-DDKITSFL=$(pwd)
+export DDKITSFL=$(pwd)
 
 clear
 cat $LOGO
@@ -18,7 +18,7 @@ echo -e "
 ddk ip
 
 # docker-machine ls | grep ddkits  >/dev/null && export DDKITSIP=$(docker-machine ip ddkits) || export DDKITSIP='127.0.0.1'
-# echo -e 'Your DDkits ip:
+# echo -e 'Your DDkits ip: 
 #     '${DDKITSIP}
 #  delete ddkits conf file for the custom site if available
 if [ -f "./ddkits-files/ddkits/sites/ddkitscust.conf" ]; then
