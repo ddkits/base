@@ -397,7 +397,7 @@ ddk() {
       echo ${SUDOPASS} | sudo -S rm ~/.ddkits_alias
       echo ${SUDOPASS} | sudo -S rm ~/.ddkits_alias_web
       # echo "Please enter your password if requested."
-      SITEDEL=ddkits
+      SITEDEL="ddkits.site"
       # echo ${SUDOPASS} | sudo -S cat /etc/hosts
       # Remove the Source from Bash file
       matches="$(grep -n ${SITEDEL} /etc/hosts | cut -f1 -d:)"
@@ -484,9 +484,11 @@ ddk() {
       docker-compose -f ~/.ddkits/ddkits.yml -f ddkits.env.yml rm
     fi
   elif [[ $1 == "init" ]]; then
-    clear
     echo $SUDOPASS | sudo -S cat $LOGO
+    mkdir .ddkits-files
+    chmod -R 777 .ddkits-files
     echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.init.sh .ddkits-files/ddkits.init.sh
+    clear
     source .ddkits-files/ddkits.init.sh
   elif [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
     clear
