@@ -4,9 +4,12 @@
 #
 #  Created by mutasem elayyoub ddkits.com
 #
+shopt -s extglob
 # Copy the new Alias system and making sure of the DDKits installation
 ddk() {
   # Check if the file exist
+  RED='\033[0;31m'
+  NC='\033[0m'
   FILE=~/.ddkits/ddkits-files/ddkits/p.sh
   if test -f "$FILE"; then
     source $FILE
@@ -38,7 +41,7 @@ ddk() {
     echo $SUDOPASS | sudo -S cat $LOGO
     echo -e 'Welcome to DDKits world...'
     export COMPOSE_TLS_VERSION=TLSv1_2
-
+    export CONFIGIS=<(cat /System/Library/OpenSSL/openssl.cnf <(printf '[SAN]\nsubjectAltName=DNS:ddkits.site'))
     # create the crt files for ssl
     echo -e 'Creating Self assigned KEY & CRT'
     openssl req \
@@ -51,8 +54,7 @@ ddk() {
       -subj /CN=ddkits.site \
       -reqexts SAN \
       -extensions SAN \
-      -config <(cat /System/Library/OpenSSL/openssl.cnf \
-        <(printf '[SAN]\nsubjectAltName=DNS:ddkits.site')) \
+      -config $CONFIGIS \
       -sha256 \
       -days 3650
     mkdir ~/.ddkits/ddkits-files/ddkits/ssl
@@ -61,10 +63,10 @@ ddk() {
     chmod -R 777 ~/.ddkits/ddkits-files/ddkits/ssl
     echo "ssl crt and .key files moved correctly"
     echo -e 'DDkits web
-    ' > ~/.ddkits_alias_web
-      # ddk c | grep ddkits  >/dev/null && export DDKITSIP='127.0.0.1' || export DDKITSIP='Please make sure your DDKits container is installed and running'
-      echo -e '(1) Localhost \n(2) virtualbox'
-      read DDKITSVER
+    ' >~/.ddkits_alias_web
+    # ddk c | grep ddkits  >/dev/null && export DDKITSIP='127.0.0.1' || export DDKITSIP='Please make sure your DDKits container is installed and running'
+    echo -e '(1) Localhost \n(2) virtualbox'
+    read DDKITSVER
     if [[ $DDKITSVER == 1 ]]; then
       clear
       echo $SUDOPASS | sudo -S cat $LOGO
@@ -188,7 +190,7 @@ ddk() {
         fi
       fi
       clear
-        echo $SUDOPASS | sudo -S cat $LOGO
+      echo $SUDOPASS | sudo -S cat $LOGO
       if [[ -f ~/.ddkits_alias ]]; then
         echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
         echo $SUDOPASS | sudo -S cp ddkits_alias ~/.ddkits_alias
@@ -212,7 +214,7 @@ ddk() {
       fi
     fi
   elif [[ $1 == "ip" ]]; then
-    Docker-machine ls | grep ddkits  >/dev/null && export DDKMACHINE=1 || echo 'DDKits container is not using DDKits Docker Machine'
+    Docker-machine ls | grep ddkits >/dev/null && export DDKMACHINE=1 || echo 'DDKits container is not using DDKits Docker Machine'
     # export DDKITSIP=$(docker-machine ip ddkits)
     if [[ $DDKMACHINE == "1" ]]; then
       ddk go
@@ -226,34 +228,19 @@ ddk() {
   elif [[ $1 == "check" ]]; then
     docker ps --filter "name=ddkits"
   elif [[ $1 == "fix" ]]; then
-    # Alias file
-    ALIASFILE=~/.ddkits_alias
-    if [[ -f $ALIASFILE ]]; then
-      clear
-      echo $SUDOPASS | sudo -S cat $LOGO
-      echo -e 'ifconfig Refresh ->'
-      echo $SUDOPASS | sudo -S ifconfig vboxnet0 down && sudo ifconfig vboxnet0 up
-      echo -e 'ifconfig Refresh -> done ifconfig'
-      echo $SUDOPASS | sudo -S  rm ~/.ddkits_alias
-      echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ~/.ddkits/ddkits_alias
-      echo $SUDOPASS | sudo -S  cp ~/.ddkits/ddkits_alias ~/.ddkits_alias
-      echo $SUDOPASS | sudo -S  chmod u+x ~/.ddkits_alias
-      source ~/.ddkits_alias
-      source ~/.ddkits_alias_web
-      docker restart $(docker ps -q)
-    else
-      clear
-      echo $SUDOPASS | sudo -S cat $LOGO
-      echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
-      echo $SUDOPASS | sudo -S  cp ddkits_alias ~/.ddkits_alias
-      echo $SUDOPASS | sudo -S  chmod u+x ~/.ddkits_alias
-      source ~/.ddkits_alias
-      source ~/.ddkits_alias_web
-      docker restart $(docker ps -q)
-      ddk c | grep ddkits  >/dev/null && ddk install || echo -e 'DDkits Ready to go, well done :-)'
-
-    fi
-
+    clear
+    echo $SUDOPASS | sudo -S cat $LOGO
+    echo -e 'ifconfig Refresh ->'
+    echo $SUDOPASS | sudo -S ifconfig vboxnet0 down && sudo ifconfig vboxnet0 up
+    echo -e 'ifconfig Refresh -> done ifconfig'
+    echo $SUDOPASS | sudo -S rm ~/.ddkits_alias
+    echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ~/.ddkits/ddkits_alias
+    echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits_alias ~/.ddkits_alias
+    echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias
+    source ~/.ddkits_alias
+    source ~/.ddkits_alias_web
+    docker restart $(docker ps -q)
+    ddk c | grep ddkits >/dev/null && echo -e 'DDkits Ready to go, well done :-)' || ddk install
   elif [[ $1 == "com" ]]; then
     clear
     echo $SUDOPASS | sudo -S cat $LOGO
@@ -273,6 +260,7 @@ ddk() {
     echo $SUDOPASS | sudo -S cat $LOGO
     source ddkits-files/ddkitsInfo.dev.sh ddkits-files/ddkitsInfo.ports.sh ddkits-files/ddkitscli.sh
     source ~/.ddkits_alias ~/.ddkits_alias_web
+    export CONFIGREBUILD=<(cat /System/Library/OpenSSL/openssl.cnf <(printf '[SAN]\nsubjectAltName=DNS:'$DDKITSSITES''))
     # create the crt files for ssl
     openssl req \
       -newkey rsa:2048 \
@@ -284,8 +272,7 @@ ddk() {
       -subj /CN=$DDKITSSITES.site \
       -reqexts SAN \
       -extensions SAN \
-      -config <(cat /System/Library/OpenSSL/openssl.cnf \
-        <(printf '[SAN]\nsubjectAltName=DNS:'$DDKITSSITES'')) \
+      -config $CONFIGREBUILD \
       -sha256 \
       -days 3650
     mv $DDKITSSITES.key $DDKITSFL/ddkits-files/ddkits/ssl/
@@ -484,9 +471,11 @@ ddk() {
       docker-compose -f ~/.ddkits/ddkits.yml -f ddkits.env.yml rm
     fi
   elif [[ $1 == "init" ]]; then
-    clear
     echo $SUDOPASS | sudo -S cat $LOGO
+    mkdir .ddkits-files
+    chmod -R 777 .ddkits-files
     echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.init.sh .ddkits-files/ddkits.init.sh
+    clear
     source .ddkits-files/ddkits.init.sh
   elif [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
     clear
@@ -513,7 +502,7 @@ ddk() {
             **************************
         i       - Show all your docker images
         c       - Show all your docker containers
-        r       - Docker run\n
+        r       - Docker run
         rm      - Remove your compose extra unused containers or containers with error
             **************************
         rm all  - Restore docker images and containers "Important this command remove all your containers and images"
@@ -531,7 +520,7 @@ ddk() {
     SOLR     http://solr.YOUR_DOMAIN.ddkits.site
     PhpMyAdmin     http://admin.YOUR_DOMAIN.ddkits.site
 
-    DDKits v3.01
+    DDKits v3.21
         '
   else
     echo 'DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com
