@@ -42,7 +42,7 @@ ddk() {
       LOGO=~/.ddkits/ddkits-files/ddkits/logo.txt
       echo -e 'export SUDOPASS='${SUDOPASS}'
               export LOGO='${LOGO}'' >~/.ddkits/ddkits-files/ddkits/p.sh
-      chmod 700 ~/.ddkits/ddkits-files/ddkits/p.sh
+      echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits/ddkits-files/ddkits/p.sh
       clear
       echo $SUDOPASS | sudo -S cat $LOGO
       echo -e 'Welcome to DDKits world...'
@@ -465,7 +465,7 @@ ddk() {
     SOLR     http://solr.YOUR_DOMAIN.ddkits.site
     PhpMyAdmin     http://admin.YOUR_DOMAIN.ddkits.site
 
-    DDKits v4.01
+    DDKits v3.25
         '
   else
     echo 'DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com
