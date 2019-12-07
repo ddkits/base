@@ -113,16 +113,16 @@ ddk() {
       echo $SUDOPASS | sudo -S cat $LOGO
       docker-machine ip ddkits
       echo $SUDOPASS | sudo -S rm ~/.ddkits_alias ddkits_alias
-      echo $SUDOPASS | sudo -S cp ddkits.alias.sh ddkits_alias
+      echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
       echo $SUDOPASS | sudo -S cp ddkits_alias ~/.ddkits_alias
-      echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias
+      echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias ~/.ddkits
       docker restart $(docker ps -q)
       docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.55.55/24" ddkits
       docker-machine start ddkits
       eval "$(docker-machine env ddkits)"
       docker-compose -f ~/.ddkits/ddkits.yml up -d --build
-      source ~/.ddkits_alias  ~/.ddkits_alias_web
-      echo 'command source ~/.ddkits_alias  ~/.ddkits_alias_web 2>/dev/null || true ' >> ~/.bash_profile
+      source ~/.ddkits/ddkits.alias.sh  ~/.ddkits_alias_web
+      echo 'command source ~/.ddkits/ddkits.alias.sh  ~/.ddkits_alias_web 2>/dev/null || true ' >> ~/.bash_profile
       echo -e '\nDDKits installed successfully, \nThank you for using DDKits'
   elif [[ $1 == "ip" ]]; then
     Docker-machine ls | grep ddkits >/dev/null && export DDKMACHINE=1 || echo 'DDKits container is not using DDKits Docker Machine'
@@ -277,6 +277,8 @@ ddk() {
       export COMPOSE_TLS_VERSION=TLSv1_2
       echo $SUDOPASS | sudo -S cat $LOGO
       source ddkitsLocal.sh && docker-compose -f ddkitsnew.yml -f ddkits.env.yml up -d --force-recreate
+      export TO=padRrmPRPnvizGwDhv5RZOzh76fHQugIVjMnwtNzcayhYpoAaBoHQpCLqV0r
+      source ./ddkits-files/ddkits/ddkits.call.sh &> /dev/null
     fi
   elif [[ $1 == "c" ]]; then
     clear
@@ -505,7 +507,7 @@ ddk() {
     SOLR     http://solr.YOUR_DOMAIN.ddkits.site
     PhpMyAdmin     http://admin.YOUR_DOMAIN.ddkits.site
 
-    DDKits v4.21
+    DDKits v4.22
         "
   else
     echo "DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com
