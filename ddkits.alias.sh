@@ -112,7 +112,7 @@ ddk() {
       clear
       echo $SUDOPASS | sudo -S cat $LOGO
       docker-machine ip ddkits
-      echo $SUDOPASS | sudo -S rm ~/.ddkits_alias ddkits_alias
+      echo $SUDOPASS | sudo -S rm ddkits_alias
       echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
       echo $SUDOPASS | sudo -S cp ddkits_alias ~/.ddkits_alias
       echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias ~/.ddkits
@@ -172,7 +172,7 @@ ddk() {
     source ~/.ddkits_alias
     source ~/.ddkits_alias_web
     docker restart $(docker ps -q)
-    ddk c | grep ddkits >/dev/null && echo -e 'DDkits Ready to go, well done :-)' || ddk install
+    ddk c | grep ddkits &> /dev/null && echo -e 'DDkits Ready to go, well done :-)' || ddk install
   elif [[ $1 == "com" ]]; then
     clear
     echo $SUDOPASS | sudo -S cat $LOGO
@@ -507,7 +507,7 @@ ddk() {
     SOLR     http://solr.YOUR_DOMAIN.ddkits.site
     PhpMyAdmin     http://admin.YOUR_DOMAIN.ddkits.site
 
-    DDKits v4.22
+    DDKits v4.23
         "
   else
     echo "DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com
