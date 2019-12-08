@@ -252,17 +252,22 @@ ddk() {
 
     # echo ${SUDOPASS} | sudo -S cat /etc/hosts
 
-    if [[ ! -z "$matches_in_hosts" ]]; then
+    matches_in_hosts="$(grep -n ${DDKITSSITES} /etc/hosts | cut -f1 -d:)"
+    if [ ! -z "$matches_in_hosts" ]; then
       echo "Updating existing hosts entry."
-
       # iterate over the line numbers on which matches were found
       while read -r line_number; do
         # replace the text of each line with the desired host entry
-        echo ${SUDOPASS} | sudo -S sed -i '' "${line_number}s/.*/${host_entry} /" /etc/hosts
+        # echo ${SUDOPASS} | sudo -S sed -i '' "${line_number}s/.*/${host_entry} /" /etc/hosts
+        echo ${SUDOPASS} | sudo -S sed "/${host_entry}/d" /etc/hosts >~/hosts
+        echo ${SUDOPASS} | sudo -S sed "/${pat}/d" /etc/hosts >~/hosts
+        echo ${SUDOPASS} | sudo -S mv ~/hosts /etc/hosts
       done <<<"$matches_in_hosts"
+      echo "Adding new hosts entry."
+      echo "${ddkits_host_entry}" | sudo tee -a /etc/hosts >/dev/null
     else
       echo "Adding new hosts entry."
-      echo "$host_entry" | sudo tee -a /etc/hosts >/dev/null
+      echo "${ddkits_host_entry}" | sudo tee -a /etc/hosts >/dev/null
     fi
     echo ${SUDOPASS} | sudo -S cat /etc/hosts
     echo -e 'copying conf files into ddkits and restart'
