@@ -62,7 +62,7 @@ elif [[ "$OSTYPE" == "win32" ]]; then
         echo 'This machine is '$PLATFORM' Docker setup will start now PLEASE MAKE SURE TO HAVE "WGET" INSTALLED ON YOUR SYSTEM'
         if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi &&
               curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-$(uname -s)-$(uname -m) >/usr/local/bin/docker-compose
-            curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-Windows-x86_64.exe >"$HOME/bin/docker-machine.exe" &&
+              curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-Windows-x86_64.exe >"$HOME/bin/docker-machine.exe" &&
               chmod +x "$HOME/bin/docker-machine.exe"
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
         PLATFORM='freebsd'

