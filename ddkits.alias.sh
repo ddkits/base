@@ -172,6 +172,7 @@ ddk() {
     source ~/.ddkits_alias_web
     docker restart $(docker ps -q)
     ddk c | grep ddkits &>/dev/null && echo -e 'DDkits Ready to go, well done :-)' || ddk install
+    source ./.ddkits/ddkits.alias.web.sh
   elif [[ $1 == "com" ]]; then
     clear
     echo $SUDOPASS | sudo -S cat $LOGO
@@ -270,6 +271,8 @@ ddk() {
     fi
     echo -e "After your hosts are"
     echo ${SUDOPASS} | sudo -S cat /etc/hosts
+    # create alias for the containers
+    source ./.ddkits/ddkits.alias.web.sh
     echo -e 'copying conf files into ddkits and restart'
     docker cp ./ddkits-files/ddkits/sites/ddkitscust.conf ddkits:/etc/apache2/sites-enabled/ddkits_$DDKITSHOSTNAME.conf
     # docker cp ~/.ddkits/ddkitscli.sh $DDKITSHOSTNAME'_ddkits_joomla_web':/var/www/html/ddkitscli.sh
@@ -513,7 +516,7 @@ ddk() {
     SOLR     http://solr.YOUR_DOMAIN.ddkits.site
     PhpMyAdmin     http://admin.YOUR_DOMAIN.ddkits.site
 
-    DDKits v4.274
+    DDKits v4.275
         "
   else
     echo "DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com

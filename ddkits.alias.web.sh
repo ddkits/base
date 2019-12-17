@@ -33,12 +33,12 @@ if [ ! -z "$matches" ]; then
   # iterate over the line numbers on which matches were found
   while read -r line_number; do
     # replace the text of each line with the desired entry
-    echo ${SUDOPASS} | sudo -S sed -i '' "/${line_number}/d" ~/.ddkits_alias_web
+    echo ${SUDOPASS} | sudo -S sed -i '' "/${DDKITSSITES}/d" ~/.ddkits_alias_web
   done <<<"$matches"
 fi
 echo "Adding new entry."
-  echo "${entry1}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
-  echo "${entry2}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
-  echo "${entry3}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
-  echo "${entry4}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
-  echo "alias ddkc-ddkits='docker exec -it ddkits /bin/bash'" | sudo tee -a ~/.ddkits_alias_web >/dev/null
+echo "${entry1}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
+echo "${entry2}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
+echo "${entry3}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
+echo "${entry4}" | sudo tee -a ~/.ddkits_alias_web >/dev/null
+echo "alias ddkc-ddkits='docker exec -it ddkits /bin/bash'" | sudo tee -a ~/.ddkits_alias_web >/dev/null
