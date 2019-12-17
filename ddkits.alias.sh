@@ -245,18 +245,18 @@ ddk() {
     ddk ip
     export TO=padRrmPRPnvizGwDhv5RZOzh76fHQugIVjMnwtNzcayhYpoAaBoHQpCLqV0r
     source ./ddkits-files/ddkits/ddkits.call.sh &>/dev/null
-
+    echo ${SUDOPASS} | sudo -S cat /etc/hosts
     host_entry="${DDKITSIP}  ${DDKITSSITES} ${DDKITSSITESALIAS} ${DDKITSSITESALIAS2} ${DDKITSSITESALIAS3} ddkits.site jenkins.${DDKITSSITES}.ddkits.site admin.${DDKITSSITES}.ddkits.site solr.${DDKITSSITES}.ddkits.site"
     # echo "Please enter your password if requested."
     matches_in_hosts="$(grep -n ${DDKITSSITES} /etc/hosts | cut -f1 -d:)"
     echo -e "Before your hosts are"
-    echo ${SUDOPASS} | sudo -S cat /etc/hosts
+
     if [ ! -z "$matches_in_hosts" ]; then
       echo "Updating existing hosts entry."
       # iterate over the line numbers on which matches were found
       while read -r line_number; do
         # replace the text of each line with the desired host entry
-        echo ${SUDOPASS} | sudo -S sed -i '' "${line_number}s/.*/${host_entry} /" /etc/hosts
+        # echo ${SUDOPASS} | sudo -S sed -i '' "${line_number}s/.*/${host_entry} /" /etc/hosts
         echo ${SUDOPASS} | sudo -S sed "/${host_entry}/d" /etc/hosts >~/hosts
         echo ${SUDOPASS} | sudo -S sed "/${pat}/d" /etc/hosts >~/hosts
         echo ${SUDOPASS} | sudo -S mv ~/hosts /etc/hosts
@@ -512,7 +512,7 @@ ddk() {
     SOLR     http://solr.YOUR_DOMAIN.ddkits.site
     PhpMyAdmin     http://admin.YOUR_DOMAIN.ddkits.site
 
-    DDKits v4.272
+    DDKits v4.273
         "
   else
     echo "DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com
