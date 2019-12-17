@@ -248,6 +248,7 @@ ddk() {
     echo ${SUDOPASS} | sudo -S cat /etc/hosts
     host_entry="${DDKITSIP}  ${DDKITSSITES} ${DDKITSSITESALIAS} ${DDKITSSITESALIAS2} ${DDKITSSITESALIAS3} ddkits.site jenkins.${DDKITSSITES}.ddkits.site admin.${DDKITSSITES}.ddkits.site solr.${DDKITSSITES}.ddkits.site"
     # echo "Please enter your password if requested."
+    pat="jenkins.${DDKITSSITES}.ddkits.site"
     matches_in_hosts="$(grep -n ${DDKITSSITES} /etc/hosts | cut -f1 -d:)"
     echo -e "Before your hosts are"
 
@@ -257,7 +258,7 @@ ddk() {
       while read -r line_number; do
         # replace the text of each line with the desired host entry
         # echo ${SUDOPASS} | sudo -S sed -i '' "${line_number}s/.*/${host_entry} /" /etc/hosts
-        echo ${SUDOPASS} | sudo -S sed "/${host_entry}/d" /etc/hosts >~/hosts
+        echo ${SUDOPASS} | sudo -S sed "/${DDKITSSITES}/d" /etc/hosts >~/hosts
         echo ${SUDOPASS} | sudo -S sed "/${pat}/d" /etc/hosts >~/hosts
         echo ${SUDOPASS} | sudo -S mv ~/hosts /etc/hosts
       done <<<"$matches_in_hosts"
