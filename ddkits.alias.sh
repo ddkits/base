@@ -250,7 +250,7 @@ ddk() {
     host_entry="${DDKITSIP}  ${DDKITSSITES} ${DDKITSSITESALIAS} ${DDKITSSITESALIAS2} ${DDKITSSITESALIAS3} ddkits.site jenkins.${DDKITSSITES}.ddkits.site admin.${DDKITSSITES}.ddkits.site solr.${DDKITSSITES}.ddkits.site"
     # echo "Please enter your password if requested."
 
-    # echo ${SUDOPASS} | sudo -S cat /etc/hosts
+    echo ${SUDOPASS} | sudo -S cat /etc/hosts
 
     matches_in_hosts="$(grep -n ${DDKITSSITES} /etc/hosts | cut -f1 -d:)"
     if [ ! -z "$matches_in_hosts" ]; then
@@ -264,10 +264,10 @@ ddk() {
         echo ${SUDOPASS} | sudo -S mv ~/hosts /etc/hosts
       done <<<"$matches_in_hosts"
       echo "Adding new hosts entry."
-      echo "${ddkits_host_entry}" | sudo tee -a /etc/hosts >/dev/null
+      echo "${matches_in_hosts}" | sudo tee -a /etc/hosts >/dev/null
     else
       echo "Adding new hosts entry."
-      echo "${ddkits_host_entry}" | sudo tee -a /etc/hosts >/dev/null
+      echo "${matches_in_hosts}" | sudo tee -a /etc/hosts >/dev/null
     fi
     echo ${SUDOPASS} | sudo -S cat /etc/hosts
     echo -e 'copying conf files into ddkits and restart'
