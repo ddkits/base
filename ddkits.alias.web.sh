@@ -20,6 +20,7 @@ alias ddkc-ddkits='docker exec -it ddkits /bin/bash'
 # echo "alias ddkc-"$DDKITSSITES"-admin='docker exec -it "$DDKITSHOSTNAME"_ddkits_admin /bin/bash'" >> ~/.ddkits_alias_web
 
 # New entry check to stay out of duplications
+entry1="alias ddkc-"$DDKITSSITES"='docker exec -it "$DDKITSHOSTNAME"_ddkits_web /bin/bash'"
 entry1="alias ddkc-"$DDKITSSITES"-cache='docker exec -it "$DDKITSHOSTNAME"_ddkits_cache /bin/bash'"
 entry2="alias ddkc-"$DDKITSSITES"-jen='docker exec -it "$DDKITSHOSTNAME"_ddkits_jenkins /bin/bash'"
 entry3="alias ddkc-"$DDKITSSITES"-solr='docker exec -it "$DDKITSHOSTNAME"_ddkits_solr /bin/bash'"
