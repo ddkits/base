@@ -1,3 +1,11 @@
+# DDKits v4.302 Built by Mutasem Elayyoub melayyoub@outlook.com
+
+- HTTPS/HTTP 
+- Bash Profile Commands Fix for DDkits
+- Cleanup Codes
+- Included Chef Development Kit and Server
+- Jenkins Alone Instance
+
 # DDKits v2.01 Built by Mutasem Elayyoub melayyoub@outlook.com
 
 - HTTPS/HTTP included with all CMSs
