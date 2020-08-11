@@ -1,3 +1,14 @@
+# DDKits v4.322 Built by Mutasem Elayyoub melayyoub@outlook.com
+
+- Custom Version php.ini error fix 
+
+# DDKits v4.321 Built by Mutasem Elayyoub melayyoub@outlook.com
+
+- Custom Version
+- Hotfixes
+- New Version of Postgres
+- Auto Postgres User/DB/pass as mysql
+
 # DDKits v4.311 Built by Mutasem Elayyoub melayyoub@outlook.com
 
 - DDK Kube initialize Kubernetes UI using the latest Docker Kubernetes Locally
