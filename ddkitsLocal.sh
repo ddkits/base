@@ -26,7 +26,7 @@ DDKITSADMINPORT="$(awk -v min=4101 -v max=5000 'BEGIN{srand(); print int(min+ran
 echo -e "Your new PhpMyAdmin port is  ${DDKITSADMINPORT} "
 DDKITSREDISPORT="$(awk -v min=5001 -v max=6000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')"
 echo -e "Your new Radis port is  ${DDKITSREDISPORT} "
-DDKITSPSTGPORT="$(awk -v min=5001 -v max=6000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')"
+DDKITSPSTGPORT="$(awk -v min=9001 -v max=10000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')"
 echo -e "Your new Radis port is  ${DDKITSPSTGPORT} "
 
 export DDKITSDBPORT=$DDKITSDBPORT
