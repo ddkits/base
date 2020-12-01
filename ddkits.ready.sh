@@ -8,7 +8,9 @@
 
 DDKITSFL=$(pwd)
 export $DDKITSFL
-
+export $DDKITSSITES
+WORDTOREMOVE='.site'
+DDKITSSSL=${DDKITSSITES//$WORDTOREMOVE/}
 # Check DDKits ENV file
 if [[ -f '.ddkenv' ]]; then
   source .ddkenv
@@ -24,7 +26,7 @@ if [[ -f '.ddkenv' ]]; then
     -keyout $DDKITSSITES.key \
     -new \
     -out $DDKITSSITES.crt \
-    -subj /CN=$DDKITSSITES \
+    -subj /CN=$DDKITSSSL \
     -reqexts SAN \
     -extensions SAN \
     -config <(cat /System/Library/OpenSSL/openssl.cnf \
