@@ -20,11 +20,13 @@ ddk() {
   else
     echo -e 'Enter your Sudo/Root Password "just for setup purposes":'
     read -s SUDOPASS
+    export SUDOPASS=$SUDOPASS
   fi
   # check if the sudo variable exist for use
   if test -z "$SUDOPASS"; then
     echo -e 'Enter your Sudo/Root Password "just for setup purposes":'
     read -s SUDOPASS
+    export SUDOPASS=$SUDOPASS
   fi
   
   # Delete ddkits_alis if exist
@@ -33,9 +35,9 @@ ddk() {
     fi
   # check if the alias file exist in root
   if test -f "$FILEALIAS"; then
-    echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
-    echo $SUDOPASS | sudo -S cp ~/.ddkits/ddkits_alias ~/.ddkits_alias
-    echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias ~/.ddkits_alias_web ~/.ddkits
+    echo "${SUDOPASS}" | sudo -S cp ~/.ddkits/ddkits.alias.sh ddkits_alias
+    echo "${SUDOPASS}" | sudo -S cp ~/.ddkits/ddkits_alias ~/.ddkits_alias
+    echo "${SUDOPASS}" | sudo -S chmod u+x ~/.ddkits_alias ~/.ddkits_alias_web ~/.ddkits
   fi
   FILE2=ddkits-files/ddkitsInfo.dev.sh
   # checking if the site has a root
