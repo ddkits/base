@@ -255,7 +255,7 @@ ddk() {
       -keyout $DDKITSSITES.key \
       -new \
       -out $DDKITSSITES.crt \
-      -subj /CN=ddkits.site \
+      -subj /CN=$DDKITSSITES \
       -sha256 \
       -days 60
     mv "$DDKITSSITES".key "$DDKITSFL"/ddkits-files/ddkits/ssl/
@@ -587,7 +587,7 @@ ddk() {
     Redis         ddkc-SiteName-cache
 
             **************************
-    DDKits v4.323
+    DDKits v4.324
         "
   else
     echo "DDkits build by Mutasem Elayyoub and ready to usesource  www.DDKits.com
