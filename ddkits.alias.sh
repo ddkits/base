@@ -252,9 +252,9 @@ ddk() {
       -newkey rsa:2048 \
       -x509 \
       -nodes \
-      -keyout ddkits.site.key \
+      -keyout $DDKITSSITES.key \
       -new \
-      -out ddkits.site.crt \
+      -out $DDKITSSITES.crt \
       -subj /CN=ddkits.site \
       -sha256 \
       -days 60
