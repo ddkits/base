@@ -180,7 +180,8 @@ ddk() {
     clear
     echo "${SUDOPASS}" | sudo -S cat $LOGO
     echo -e 'ifconfig Refresh ->'
-    echo "${SUDOPASS}" | sudo -S ifconfig vboxnet0 down && sudo ifconfig vboxnet0 up
+    echo "${SUDOPASS}" | sudo -S ifconfig vboxnet0 down
+    echo "${SUDOPASS}" | sudo -S ifconfig vboxnet0 up
     echo -e 'ifconfig Refresh -> done ifconfig'
     DIRECTORY="$(echo ~/.ddkits)"
     # remove the directory first to pull it again
