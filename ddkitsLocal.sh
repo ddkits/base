@@ -28,10 +28,9 @@ DDKITSREDISPORT="$(awk -v min=7010 -v max=8000 'BEGIN{srand(); print int(min+ran
 echo -e "Your new Radis port is  ${DDKITSREDISPORT} "
 DDKITSPSTGPORT="$(awk -v min=8010 -v max=9000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')"
 echo -e "Your new Radis port is  ${DDKITSPSTGPORT} "
-DDKITSVER="$(ddk ip)"
 echo -e "Your new Server is using ip  ${DDKITSVER} "
 
-export DDKITSVER=$DDKITSVER
+export DDKITSVER=$DDKITSIP
 export DDKITSDBPORT=$DDKITSDBPORT
 export DDKITSREDISPORT=$DDKITSREDISPORT
 export DDKITSSOLRPORT=$DDKITSSOLRPORT
