@@ -505,7 +505,7 @@ else
       echo ${SUDOPASS} | sudo -S sed -i '' "/${line_number}/d" ${BSHFILE}
     done <<<"$matchesbash"
   fi
-  echo $SUDOPASS | sudo -S echo 'command source ~/.ddkits/ddkits.alias.sh  ~/.ddkits_alias_web 2>/dev/null || true ' >>~/.bash_profile
+  echo $SUDOPASS | sudo -S echo 'source ~/.ddkits/ddkits.alias.sh  ~/.ddkits_alias_web &>/dev/null' >>~/.bash_profile
   # echo $SUDOPASS | sudo -S cat ~/.ddkits_alias_web
   echo $SUDOPASS | sudo -S chmod u+x ~/.ddkits_alias_web
   source ~/.bash_profile
