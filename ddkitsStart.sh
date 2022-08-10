@@ -13,14 +13,14 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo 'This machine is '$PLATFORM' Docker setup will start now'
         echo $SUDOPASS | sudo -S apt-get install wget git -y
          curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-$(uname -s)-$(uname -m) >/usr/local/bin/docker-compose
-            curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+            curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
               chmod +x /tmp/docker-machine &&
               echo $SUDOPASS | sudo -S cp /tmp/docker-machine /usr/local/bin/docker-machine
             echo $SUDOPASS | sudo -S chmod +x /usr/local/bin/docker-compose
         PLATFORM='linux-gnu'
           echo 'This machine is '$PLATFORM' Docker setup will start now'
           echo $SUDOPASS | sudo -S apt-get install wget curl git -y
-          curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+          curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
             echo $SUDOPASS | sudo -S chmod +x /tmp/docker-machine &&
             echo $SUDOPASS | sudo -S cp /tmp/docker-machine /usr/local/bin/docker-machine
     elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -28,12 +28,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo 'This machine is '$PLATFORM' Docker setup will start now'
         echo $SUDOPASS | sudo -S gem install wget git -y
         curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-$(uname -s)-$(uname -m) >/usr/local/bin/docker-compose
-            curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine &&
+            curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine &&
               echo $SUDOPASS | sudo -S chmod +x /usr/local/bin/docker-machine
             echo $SUDOPASS | sudo -S chmod +x /usr/local/bin/docker-compose
         PLATFORM='MacOS'
           echo 'This machine is '$PLATFORM' Docker setup will start now'
-          curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine &&
+          curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine &&
             echo $SUDOPASS | sudo -S chmod +x /usr/local/bin/docker-machine
         echo "-- Starting Docker.app, if necessary..."
 
@@ -60,7 +60,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         echo 'This machine is '$PLATFORM' Docker setup will start now PLEASE MAKE SURE TO HAVE "WGET" INSTALLED ON YOUR SYSTEM'
         if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi &&
               curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-$(uname -s)-$(uname -m) >/usr/local/bin/docker-compose
-            curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-Windows-x86_64.exe >"$HOME/bin/docker-machine.exe" &&
+            curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-Windows-x86_64.exe >"$HOME/bin/docker-machine.exe" &&
               chmod +x "$HOME/bin/docker-machine.exe"
     elif [[ "$OSTYPE" == "freebsd"* ]]; then
         PLATFORM='freebsd'
