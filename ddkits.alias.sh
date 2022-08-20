@@ -158,7 +158,8 @@ ddk() {
     echo "${SUDOPASS}" | sudo -S chmod u+x ~/.ddkits_alias ~/.ddkits_alias_web ~/.ddkits
     source ~/.ddkits_alias ~/.ddkits_alias_web
     docker restart $(docker ps -q)
-    docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.55.55/24" ddkits
+    #docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.55.55/24" ddkits
+    docker-machine create --driver virtualbox ddkits
     docker-machine start ddkits
     eval "$(docker-machine env ddkits)"
     docker-compose -f ~/.ddkits/ddkits.yml up -d --build
