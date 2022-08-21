@@ -159,6 +159,10 @@ ddk() {
     source ~/.ddkits_alias ~/.ddkits_alias_web
     docker restart $(docker ps -q)
     #docker-machine create --driver virtualbox --virtualbox-hostonly-cidr "192.168.55.55/24" ddkits
+    # Fix new Mac issues with configs
+    echo "${SUDOPASS}" | sudo -S mkdir /etc/vbox
+    echo "${SUDOPASS}" | sudo -S echo '* 0.0.0.0/0 ::/0' > /etc/vbox/networks.conf
+    # -------
     docker-machine create --driver virtualbox ddkits
     docker-machine start ddkits
     eval "$(docker-machine env ddkits)"
@@ -194,6 +198,10 @@ ddk() {
     echo "${SUDOPASS}" | sudo -S ifconfig vboxnet0 down
     echo "${SUDOPASS}" | sudo -S ifconfig vboxnet0 up
     echo -e 'ifconfig Refresh -> done ifconfig'
+     # Fix new Mac issues with configs
+    echo "${SUDOPASS}" | sudo -S mkdir /etc/vbox
+    echo "${SUDOPASS}" | sudo -S echo '* 0.0.0.0/0 ::/0' > /etc/vbox/networks.conf
+    # -------
     DIRECTORY="$(echo ~/.ddkits)"
     # remove the directory first to pull it again
     echo "${SUDOPASS}" | sudo -S rm -rf "$DIRECTORY"
