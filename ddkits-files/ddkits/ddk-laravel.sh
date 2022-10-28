@@ -105,7 +105,7 @@ echo -e '
 
 #  Script.s#  Script.s
 
-FROM ddkits/lamp:7
+FROM ddkits/lamp:'$DDKITSPHPVERSION'
 
 MAINTAINER Mutasem Elayyoub "melayyoub@outlook.com"
 
